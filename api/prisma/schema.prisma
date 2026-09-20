@@ -1,0 +1,593 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String        @id @default(cuid())
+  email                 String        @unique
+  phone                 String?       @unique
+  password              String
+  fullName              String?
+  role                  String        @default("USER")
+  status                UserStatus    @default(ACTIVE)
+  avatarUrl             String?
+  lastLoginAt           DateTime?
+  isDeleted             Boolean       @default(false)
+  needsPasswordChange   Boolean       @default(false)
+  passwordChangedAt     DateTime?
+   phoneVerifiedAt       DateTime?
+   emailVerifiedAt       DateTime?
+   resetCode             String?
+   resetCodeExpiry       DateTime?
+
+  vehicles              Vehicle[]
+  trips                 Trip[]
+  fuelRecords           FuelRecord[]
+  savedRoutes           SavedRoute[]
+  roadIncidents         RoadIncident[]
+  incidentConfirmations IncidentConfirmation[]
+  communityPosts        CommunityPost[]
+  postComments          PostComment[]
+  postReactions         PostReaction[]
+  notifications         Notification[]
+  refreshTokens         RefreshToken[]
+  userVehicles          UserVehicle[]
+  systemLogs            SystemLog[]
+  moderatedIncidents      RoadIncident[] @relation("ModeratedIncidents")
+
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  @@index([email])
+  @@index([phone])
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  PENDING
+}
+
+model RefreshToken {
+  id          String   @id @default(cuid())
+  userId      String
+  token       String   @unique
+  expiresAt   DateTime
+  userAgent   String?
+  ipAddress   String?
+  revoked     Boolean  @default(false)
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  permissions Json     @default("[]")
+  isSystem    Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Vehicle {
+  id                  String          @id @default(cuid())
+  userId              String
+  name                String          // e.g., "My Toyota Corolla"
+  brand               String?
+  model               String?
+  year                Int?
+  fuelType            FuelType        @default(PETROL)
+  fuelTankCapacity    Float?          // liters
+  engineCapacity      Float?          // cc
+  transmission        TransmissionType?
+  isPrimary           Boolean         @default(false)
+   color               String?
+   plateNumber         String?
+   isDeleted           Boolean         @default(false)
+
+  user                User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userVehicles        UserVehicle[]
+  trips               Trip[]
+  fuelRecords         FuelRecord[]
+  fuelEfficiencies    VehicleFuelEfficiency[]
+
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([userId, isPrimary])
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  CNG
+  ELECTRIC
+  HYBRID
+  ETHANOL
+  HYDROGEN
+}
+
+enum TransmissionType {
+  MANUAL
+  AUTOMATIC
+  CVT
+  SEMI_AUTOMATIC
+  UNKNOWN
+}
+
+model UserVehicle {
+  id          String    @id @default(cuid())
+  userId      String
+  vehicleId   String
+  selectedAt  DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle     Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, vehicleId])
+  @@index([userId])
+}
+
+model VehicleFuelEfficiency {
+  id          String    @id @default(cuid())
+  vehicleId   String
+  fuelType    FuelType
+  averageMileage Float   // km/l or km/kWh for electric
+  distanceUnit String   @default("km")
+  volumeUnit   String   @default("liter")
+  source       String?   // "manual" | "auto" | "estimated"
+  isActive     Boolean   @default(true)
+
+  vehicle     Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([vehicleId])
+}
+
+model Place {
+  id          String    @id @default(cuid())
+  name        String
+  nameLocal   String?
+  latitude    Float
+  longitude   Float
+  type        PlaceType
+  address     String?
+  phone       String?
+  website     String?
+  tags        String[]  @default([])
+  metadata    Json?
+  source      PlaceSource @default(CUSTOM)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([latitude, longitude])
+  @@index([type])
+  @@index([name])
+}
+
+enum PlaceType {
+  FUEL_STATION
+  RESTAURANT
+  HOTEL
+  HOSPITAL
+  POLICE_STATION
+  BANK
+  SHOPPING_MALL
+  PARK
+  SCHOOL
+  COLLEGE
+  UNIVERSITY
+  BUS_STATION
+  RAILWAY_STATION
+  AIRPORT
+  TOLL_BOOTH
+  PARKING
+  CHARGING_STATION
+  REPAIR_SHOP
+  OTHER
+}
+
+enum PlaceSource {
+  CUSTOM
+  OSM
+  GOOGLE
+  USER_GENERATED
+}
+
+model RoadIncident {
+  id                String            @id @default(cuid())
+  type              IncidentType
+  title             String
+  description       String?
+  latitude          Float
+  longitude         Float
+  confidenceScore   Float             @default(0.0)
+  status            IncidentStatus    @default(ACTIVE)
+  firstReportedAt   DateTime          @default(now())
+  lastConfirmedAt   DateTime?
+  expiresAt         DateTime?
+  createdById       String
+  moderatedById     String?
+  moderationNotes   String?
+  severity          IncidentSeverity  @default(MEDIUM)
+
+  createdBy         User              @relation(fields: [createdById], references: [id])
+  moderatedBy       User?             @relation("ModeratedIncidents", fields: [moderatedById], references: [id])
+  confirmations     IncidentConfirmation[]
+  clusters          IncidentClusterIncident[]
+
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([latitude, longitude])
+  @@index([type])
+  @@index([status])
+  @@index([expiresAt])
+  @@index([firstReportedAt])
+  @@index([lastConfirmedAt])
+  @@index([createdById])
+}
+
+enum IncidentType {
+  TRAFFIC_JAM
+  ACCIDENT
+  POLICE
+  ROAD_CLOSURE
+  CONSTRUCTION
+  POTHOLE
+  BAD_ROAD
+  WATERLOGGING
+  BROKEN_SIGNAL
+  TOLL
+  HAZARD
+  VEHICLE_BREAKDOWN
+  FLOOD
+  LANDSLIDE
+  WEATHER
+}
+
+enum IncidentStatus {
+  ACTIVE
+  EXPIRED
+  RESOLVED
+  MODERATED
+}
+
+enum IncidentSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model IncidentConfirmation {
+  id          String    @id @default(cuid())
+  incidentId  String
+  userId      String
+  vote        VoteType  @default(CONFIRM)
+  createdAt   DateTime  @default(now())
+
+  incident    RoadIncident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([incidentId, userId])
+  @@index([incidentId])
+  @@index([userId])
+}
+
+enum VoteType {
+  CONFIRM
+  SKEPTICAL
+  DISMISS
+}
+
+model IncidentCluster {
+  id          String                    @id @default(cuid())
+  centerLat   Float
+  centerLng   Float
+  type        IncidentType
+  incidentCount Int                    @default(0)
+  radiusMeters  Float                  @default(100)
+  isActive      Boolean                @default(true)
+  mergedAt      DateTime               @default(now())
+
+  incidents     IncidentClusterIncident[]
+
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+
+  @@index([centerLat, centerLng])
+  @@index([type])
+  @@index([isActive])
+}
+
+model IncidentClusterIncident {
+  id              String   @id @default(cuid())
+  clusterId       String
+  incidentId      String
+
+  cluster         IncidentCluster @relation(fields: [clusterId], references: [id], onDelete: Cascade)
+  incident        RoadIncident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+
+  @@index([clusterId])
+  @@index([incidentId])
+}
+
+model SavedRoute {
+  id            String   @id @default(cuid())
+  userId        String
+  name          String?
+  originLat     Float
+  originLng     Float
+  originName    String?
+  destLat       Float
+  destLng       Float
+  destName      String?
+  waypoints     Json?    // array of {latitude, longitude, name?}
+  vehicleId     String?
+  distance      Float?   // meters
+  duration      Float?   // seconds
+  routeData     Json?    // encoded polyline / full route geometry
+  isFavorite    Boolean  @default(false)
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, isFavorite])
+}
+
+model Trip {
+  id              String    @id @default(cuid())
+  userId          String
+  vehicleId       String?
+  status          TripStatus @default(COMPLETED)
+  originLat       Float
+  originLng       Float
+  originName      String?
+  destLat         Float
+  destLng         Float
+  destName        String?
+  waypoints       Json?
+  distance        Float     // meters
+  duration        Float     // seconds
+  startTime       DateTime?
+  endTime         DateTime?
+  actualFuelUsed  Float?    // liters
+  estimatedFuel   Float?    // liters
+  actualCost      Float?    // BDT
+  estimatedCost   Float?    // BDT
+  vehicleProfile  Json?     // snapshot of vehicle at trip time
+  tollCost        Float?    // BDT
+  tollPoints      Json?     // toll points on route
+  routeGeometry   String?   // encoded polyline
+
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle         Vehicle?  @relation(fields: [vehicleId], references: [id])
+  fuelRecords     FuelRecord[]
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([startTime])
+  @@index([status])
+}
+
+enum TripStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model FuelRecord {
+  id              String    @id @default(cuid())
+  userId          String
+  vehicleId       String
+  tripId          String?
+  timestamp       DateTime  @default(now())
+  fuelType        FuelType
+  amount          Float     // liters
+  cost            Float     // BDT
+  vehicleMileage  Float?    // km/l at time of fill
+  odometerReading Float?
+  stationName     String?
+  latitude        Float?
+  longitude       Float?
+  notes           String?
+
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicle         Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  trip            Trip?     @relation(fields: [tripId], references: [id], onDelete: SetNull)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([vehicleId])
+  @@index([tripId])
+  @@index([timestamp])
+}
+
+model TollPoint {
+  id            String   @id @default(cuid())
+  name          String
+  latitude      Float
+  longitude     Float
+  price         Float     // BDT
+  vehicleClass  String?   // "car", "truck", "bus", "motorcycle"
+  isActive      Boolean   @default(true)
+  metadata      Json?
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([latitude, longitude])
+  @@index([isActive])
+  @@index([vehicleClass])
+}
+
+model CommunityPost {
+  id            String          @id @default(cuid())
+  userId        String
+  title         String
+  content       String
+  locationLat   Float?
+  locationLng   Float?
+  locationName  String?
+  visibility    PostVisibility  @default(PUBLIC)
+  isPinned      Boolean         @default(false)
+  viewCount     Int             @default(0)
+  commentCount  Int             @default(0)
+  reactionCount Int             @default(0)
+  tags          String[]        @default([])
+
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments      PostComment[]
+  reactions     PostReaction[]
+
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([visibility])
+  @@index([isPinned])
+  @@index([createdAt])
+}
+
+enum PostVisibility {
+  PUBLIC
+  FOLLOWERS
+  PRIVATE
+}
+
+model PostComment {
+  id        String    @id @default(cuid())
+  postId    String
+  userId    String
+  content   String
+  parentId  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  post      CommunityPost  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent    PostComment?   @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   PostComment[]  @relation("CommentReplies")
+
+  @@index([postId])
+  @@index([userId])
+  @@index([parentId])
+  @@index([createdAt])
+}
+
+model PostReaction {
+  id        String       @id @default(cuid())
+  postId    String
+  userId    String
+  type      ReactionType @default(LIKE)
+  createdAt DateTime     @default(now())
+
+  post      CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId, type])
+  @@index([postId])
+  @@index([userId])
+}
+
+enum ReactionType {
+  LIKE
+  LOVE
+  INSIGHTFUL
+  LAUGH
+}
+
+model Notification {
+  id            String            @id @default(cuid())
+  userId        String
+  title         String
+  body          String
+  type          NotificationType
+  referenceId   String?
+  isRead        Boolean           @default(false)
+  data          Json?
+  readAt        DateTime?
+
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime         @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([type])
+  @@index([createdAt])
+}
+
+enum NotificationType {
+  INCIDENT_NEARBY
+  INCIDENT_CONFIRMED
+  INCIDENT_RESOLVED
+  INCIDENT_EXPIRED
+  COMMUNITY_POST
+  POST_COMMENT
+  POST_REACTION
+  FUEL_ALERT
+  RANGE_WARNING
+  EMERGENCY_SOS
+  SYSTEM
+}
+
+model SystemSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  updatedBy   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SystemLog {
+  id        String     @id @default(cuid())
+  userId    String?
+  category  LogCategory
+  action    String
+  details   Json?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  user      User?      @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([category])
+  @@index([createdAt])
+}
+
+enum LogCategory {
+  SYSTEM
+  AUTH
+  DATA_UPDATE
+  INCIDENT
+  REPORT
+  COMMUNITY
+  ERROR
+}

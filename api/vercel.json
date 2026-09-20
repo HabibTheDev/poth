@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.ts"
+    },
+    {
+      "src": "/health",
+      "dest": "/api/index.ts"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/disable-expired-users",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

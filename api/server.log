@@ -1,0 +1,871 @@
+﻿
+> datahub-backend@2.0.0 dev
+> tsx watch src/server.ts
+
+[2026-09-03 07:32:59.055 +0600] [32mINFO[39m: [36m✅ Database connected successfully[39m
+[2026-09-03 07:32:59.072 +0600] [32mINFO[39m: [36mSuper admin already exists[39m
+[2026-09-03 07:32:59.117 +0600] [32mINFO[39m: [36mCron jobs started[39m
+[2026-09-03 07:32:59.118 +0600] [32mINFO[39m: [36m🚀 Server running[39m
+    [35mport[39m: "5001"
+    [35mmode[39m: "development"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 07:49:19.407 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 07:49:39.074 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:02:47.029 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:02:47.823 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:04:45.366 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:04:46.014 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:06:28.274 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:07:43.017 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:08:25.030 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:08:30.039 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:08:31.563 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:09:06.220 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:09:54.618 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:10:59.169 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:11:01.290 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:11:02.699 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:11:32.903 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:29:36.897 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:29:38.112 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:31:38.112 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
+prisma:error 
+Invalid `prisma.vehicle.findMany()` invocation in
+F:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25
+
+  41 };
+  42 
+  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {
+→ 44   return prisma.vehicle.findMany({
+         where: {
+           userId: "cmtkunutj00006bib6y16m72u",
+           isDeleted: false
+         },
+         orderBy: {
+           isPrimary: "desc",
+           createdAt: "desc"
+         },
+         ~~~~~~~~~~~~~~~~~~~
+         include: {
+           fuelEfficiencies: {
+             where: {
+               isActive: true
+             },
+             orderBy: {
+               createdAt: "desc"
+             },
+             take: 1
+           }
+         }
+       })
+
+Argument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.
+[2026-09-03 08:31:39.204 +0600] [31mERROR[39m: [36mError occurred[39m
+    [35mstatusCode[39m: 400
+    [35mmessage[39m: "Validation Error"
+    [35merrorSources[39m: [
+      {
+        "path": "",
+        "message": "Invalid data provided"
+      }
+    ]
+    [35mstack[39m: "PrismaClientValidationError: \nInvalid `prisma.vehicle.findMany()` invocation in\nF:\work\maps\api\src\app\modules\Vehicle\vehicle.service.ts:44:25\n\n  41 };\n  42 \n  43 const getUserVehicles = async (userId: string): Promise<Vehicle[]> => {\n→ 44   return prisma.vehicle.findMany({\n         where: {\n           userId: \"cmtkunutj00006bib6y16m72u\",\n           isDeleted: false\n         },\n         orderBy: {\n           isPrimary: \"desc\",\n           createdAt: \"desc\"\n         },\n         ~~~~~~~~~~~~~~~~~~~\n         include: {\n           fuelEfficiencies: {\n             where: {\n               isActive: true\n             },\n             orderBy: {\n               createdAt: \"desc\"\n             },\n             take: 1\n           }\n         }\n       })\n\nArgument `orderBy`: Invalid value provided. Expected VehicleOrderByWithRelationInput[], provided Object.\n    at wn (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:29:1363)\n    at $n.handleRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6958)\n    at $n.handleAndLogRequestError (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6623)\n    at $n.request (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:121:6307)\n    at async l (F:\work\maps\api\node_modules\@prisma\client\runtime\library.js:130:9633)\n    at async <anonymous> (F:\work\maps\api\src\app\modules\Vehicle\vehicle.controller.ts:20:18)"
