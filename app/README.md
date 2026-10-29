@@ -38,6 +38,7 @@ leaves clean seams for all of these (see `src/services`).
 npm install
 npx expo install   # aligns every native package to this Expo SDK's exact versions
 npx expo start
+npx expo start --web
 ```
 
 Requires Node 20+. Run on a device with Expo Go, or build a dev client with
